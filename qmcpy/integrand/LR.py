@@ -30,12 +30,14 @@ class LR(Integrand):
     """
     def __init__(self, sampler, s_matrix, t):
         self.true_measure = Uniform(sampler)
-        m, d = s_matrix.shape
+        s_matrix2 = array(s_matrix)
+        m, d = s_matrix2.shape
         check1 = True
         if m != len(t):
             check1 = False
         if check1 == True:
-            self.s = s_matrix
+            c = ones((len(t), 1))
+            self.s = column_stack((c, s_matrix))
         else:
             print("s_matrix must have the same amount of rows as the amount of elements in t")
         check = True
@@ -43,26 +45,19 @@ class LR(Integrand):
             if 0 != t[i] and t[i] != 1:
                 check = False
         if check == True:
-            self.t = t
+            t1 = zeros((len(t), len(t)))
+            for i in range(len(t)):
+                t1[i][i] = t[i]
+            self.t = t1
         else:
             print("for all 't_i', t_i can only equal 0 or 1")
         self.dprime = 1
         super(LR, self).__init__()
         
     def g(self, x):
-        m, d = self.s.shape
-        a, b = x.shape
-        values = []
-        for c in range(0, a):
-            product = 1
-            for i in range(0, m):
-                total = x[c][0]
-                for j in range(1, d+1):
-                    total  = (x[c][j] * self.s[i][j-1]) + total
-                value1 = exp(total)
-                value2 = value1 / (1 + value1)
-                product = product * (value2)**(self.t[i])
-                product = product * (1 - value2)**(1-self.t[i])
-            values = values + [product]
-        values = array(values)
-        return values
+        st = self.s.transpose()
+        z = x@st
+        z1 = z@self.t
+        matrix = exp(z1)/(1+exp(z))
+        matrix1 = prod(matrix, axis=1)
+        return matrix1

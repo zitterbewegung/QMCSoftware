@@ -1,7 +1,6 @@
 from qmcpy.integrand.LR import LR
 from sys import meta_path
 import numpy
-from numpy.linalg import norm as norm
 from qmcpy import *
 
 s = numpy.array([
