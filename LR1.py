@@ -2,7 +2,8 @@ from qmcpy.integrand.LR import LR
 from sys import meta_path
 import numpy
 from qmcpy import *
-
+data = numpy.genfromtxt('binary.csv', dtype=float, delimiter=',', names = True)
+print(data)
 s = numpy.array([[.40]])
 t = numpy.array([1])
 
