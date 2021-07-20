@@ -8,7 +8,7 @@ from numpy import *
 
 class LR(Integrand):
 
-    def __init__(self, sampler, s_matrix, t, prior_mean, prior_variance):
+    def __init__(self, sampler, s_matrix, t, prior_mean = 0, prior_variance = 1):
         self.true_measure = Gaussian(sampler, mean=prior_mean, covariance = prior_variance)
         s_matrix2 = array(s_matrix)
         m, d = s_matrix2.shape
