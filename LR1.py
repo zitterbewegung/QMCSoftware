@@ -4,6 +4,7 @@ import numpy
 from qmcpy import *
 data = numpy.genfromtxt('binary.csv', dtype=float, delimiter=',', skip_header = True)
 # print(data)
+# Fred adding a comment to test BBEdit
 
 mdata = 4
 s = data[:mdata,1:]
