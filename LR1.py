@@ -10,6 +10,7 @@ s = data[:n, 1:]
 t = data[:n, 0]
 
 no, dim = s.shape
+# print(s.shape)
 
 prior_variance = [1,1e-4,1,1]
 
@@ -19,7 +20,7 @@ k = LR(IIDStdUniform(dim+1,seed=8), s_matrix = s, t = t)
 solution, data = CubMCCLT(k, abs_tol = .001).integrate()
 print(data)
 print(" ")
-k1 = LR(Sobol(dim+1,seed=8), s_matrix = s, t = t)
+k1 = LR(Sobol(dim+1,seed=8), s_matrix = s, t = t,  prior_variance = prior_variance)
 solution1, data1 = CubQMCSobolG(k1, abs_tol = .001).integrate()
 print(data1)
 print(" ")
