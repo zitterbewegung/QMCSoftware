@@ -29,8 +29,8 @@ class LR(Integrand):
         z1 = z*self.t
         matrix = exp(z1)/(1+exp(z))
         matrix1 = prod(matrix, axis=1)
-        n,d=x.shape
+        n,e=x.shape
         y=zeros((n,self.dprime),dtype=float)
         y[:,0] = matrix1
-        y[:,1:] = x[:, 0:self.r]*matrix1
+        y[:,1:] = x[:, 0:self.r]*matrix1[:,None]
         return y
