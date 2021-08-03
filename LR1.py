@@ -4,7 +4,7 @@ import numpy
 from qmcpy import *
 
 def lowerbound(den, num, error_den, error_num):
-    lower_array = numpy.zeros((len(num)), dtype = float)
+    lower_array = numpy.zeros((len(num), 4), dtype = float)
     for i in range(len(num)):
         test1 = (num[i] - error_num[i]) / (den - error_den)
         test2 = (num[i] - error_num[i]) / (den + error_den)
@@ -53,7 +53,7 @@ p = my_instance.discrete_distrib.gen_samples(n_min=0, n_max=1024)
 y = my_instance.f(p)
 print(y.mean())
 """
-k = LR(Sobol(dim+1,seed=8), s_matrix = s, t = t, r = 2, prior_variance = prior_variance)
+k = LR(Sobol(dim+1,seed=8), s_matrix = s, t = t, r = 3, prior_variance = prior_variance)
 solution, data = CubQMCCLT(k, abs_tol = 0, rel_tol = .1).integrate()
 print(data)
 print(data.error_bound)
