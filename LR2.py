@@ -9,7 +9,7 @@ s = data[:n, 1:]
 t = data[:n, 0]
 no,dim_s = s.shape
 
-r = 1
+r = dim_s +1
 dim = r+1
 lr = LR(Sobol(dim_s+1,seed=8), s_matrix = s, t = t, r = r, prior_variance=[1,1e-4,1,1])
 
@@ -22,7 +22,7 @@ print(data,'\n\n'+'~'*100+'\n\n')'''
 if r==0: raise Exception('require r>0')
 qmcclt = CubQMCCLT(lr,
     abs_tol = 0,
-    rel_tol = 5e-2,
+    rel_tol = .25,
     n_init = 256,
     n_max = 2 ** 30,
     inflate = 1.2,

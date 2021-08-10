@@ -29,12 +29,11 @@ def estimate(lowbound, highbound):
 data = numpy.genfromtxt('binary.csv', dtype=float, delimiter=',', skip_header = True)
 
 n = 10
-
+#https://stats.idre.ucla.edu/r/dae/logit-regression/
 s = data[:n, 1:]
 t = data[:n, 0]
 
 no, dim = s.shape
-# print(s.shape)
 
 prior_variance = [1,1e-4,1,1]
 
