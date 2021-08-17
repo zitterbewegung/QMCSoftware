@@ -12,6 +12,9 @@ no,dim_s = s.shape
 r = dim_s +1
 dim = r+1
 lr = LR(Sobol(dim_s+1,seed=8), s_matrix = s, t = t, r = r, prior_variance=[1,1e-4,1,1])
+#https://www.markdownguide.org/cheat-sheet/
+#https://qmcpy.readthedocs.io/en/latest/demo_rst/elliptic-pde.html
+
 
 # familiar method
 '''qmcclt = CubQMCCLT(lr,abs_tol=1e-3,rel_tol=.1e-3)
