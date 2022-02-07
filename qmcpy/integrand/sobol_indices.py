@@ -179,19 +179,19 @@ class SobolIndices(Integrand):
         """
         self.parameters = ['indices']
         self.integrand = integrand
-        self.d = self.integrand.d
+        self.d = self.integrand.d  # dimension of the integrand
         # indices
         self.indices = indices
         if self.indices=='singletons':
             self.indices = [[j] for j in range(self.d)]
         if [] in self.indices:
             raise ParameterError('SobolIndices indices cannot include [], the null set.')
-        self.s = len(self.indices)
+        self.s = len(self.indices)   # length of indices
         self.indices_bool_mat = tile(False,(self.s,self.d))
         for k in range(self.s): self.indices_bool_mat[k,self.indices[k]] = True
         self.not_indices_bool_mat = ~self.indices_bool_mat
         # sensitivity_index
-        self.dtilde = 2*self.d
+        self.dtilde = 2*self.d  # dimension of sensitivity indices
         self.true_measure = self.integrand.true_measure
         self.discrete_distrib = self.true_measure.discrete_distrib.spawn(s=1,dimensions=[self.dtilde])[0]
         self.sampler = self.integrand.sampler
